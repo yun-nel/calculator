@@ -2,6 +2,7 @@ const firstNum = 0;
 const secondNum = 0;
 const operator = "";
 const display = document.querySelector(".display")
+let displayValue = 0;
 const numButtons = document.querySelectorAll(".num-button");
 
 // Takes two numbers and returns their sum.
@@ -52,6 +53,7 @@ function displayNum() {
     numButtons.forEach(button => {
         button.addEventListener("click", () => {
             display.textContent += button.textContent;
+            displayValue = display.textContent;
         });
     });
 }
