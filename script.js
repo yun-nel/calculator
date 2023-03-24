@@ -26,22 +26,26 @@ function divide(a, b) {
 
 // Takes three arguments: an operator (string) and two numbers (a and b). It performs an arithemtic operation on the two numbers based on the given operator string, and returns the result. Throws an error message if an invalid operator is provided. 
 function operate(operator, a, b) {
+    let result = 0;
+
     switch(operator) {
         case "+":
-            result = a + b;
+            result = add(a, b);
             break;
         case "-":
-            result = a - b;
+            result = subtract(a, b);
             break;
         case "*":
-            result = a * b;
+            result = multiply(a, b);
             break;
         case "/":
-            result = a / b;
+            result = divide(a, b);
             break;
         default:
             console.log("Invalid operator");
       }
+    
+    return result;
 }
 
 function displayNum() {
