@@ -1,6 +1,8 @@
 const firstNum = 0;
 const secondNum = 0;
 const operator = "";
+const display = document.querySelector(".display")
+const numButtons = document.querySelectorAll(".num-button");
 
 // Takes two numbers and returns their sum.
 function add(a, b) {
@@ -41,3 +43,13 @@ function operate(operator, a, b) {
             console.log("Invalid operator");
       }
 }
+
+function displayNum() {
+    numButtons.forEach(button => {
+        button.addEventListener("click", () => {
+            display.textContent += button.textContent;
+        });
+    });
+}
+
+displayNum()
