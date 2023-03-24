@@ -22,7 +22,7 @@ function divide(a, b) {
     return a / b;
 }
 
-// Takes three parameters: an operator (string) and two numbers (a and b). It performs an arithemtic operation on the two numbers based on the given operator string, and returns the result. Throws an error message if an invalid operator is provided. 
+// Takes three arguments: an operator (string) and two numbers (a and b). It performs an arithemtic operation on the two numbers based on the given operator string, and returns the result. Throws an error message if an invalid operator is provided. 
 function operate(operator, a, b) {
     switch(operator) {
         case "+":
