@@ -59,6 +59,10 @@ function operate(operator, a, b) {
 function displayNum() {
     numButtons.forEach(button => {
         button.addEventListener("click", () => {
+            if (display.textContent === "0") {
+                display.textContent = "";
+            }
+            
             display.textContent += button.textContent;
             displayValue = display.textContent;
 
