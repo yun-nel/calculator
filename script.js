@@ -5,7 +5,10 @@ const display = document.querySelector(".display")
 let displayValue = 0;
 const numButtons = document.querySelectorAll(".num-button");
 const opButtons = document.querySelectorAll(".operator") 
+const equalsButton = document.querySelector(".equals")
 let operatorStatus = false;
+let hasFirstNum = false;
+let result = 0;
 
 // Takes two numbers and returns their sum.
 function add(a, b) {
@@ -30,6 +33,8 @@ function divide(a, b) {
 // Takes three arguments: an operator (string) and two numbers (a and b). Calls an existing arithmetic function to perform an operation on the two numbers based on the given operator string, and returns the result. Throws an error message if an invalid operator is provided. 
 function operate(operator, a, b) {
     let result = 0;
+    a = Number(a);
+    b = Number(b);
 
     switch(operator) {
         case "+":
@@ -62,14 +67,9 @@ function displayNum() {
                 display.textContent = "";
                 display.textContent += button.textContent;
                 displayValue = display.textContent;
+                hasFirstNum = true;
             }
-
-            /*if (first calculation) {
-                
-            } else if (after first calculation) {
-
-            }
-            */
+            
         });
     });
 }
@@ -77,14 +77,36 @@ function displayNum() {
 function clickOperator() {
     opButtons.forEach(button => {
         button.addEventListener("click", () => {
-            firstNum = displayValue;
-            operator = button.id
+            if (hasFirstNum) {
+                // If we already have a first number, calculate with the second number
+                secondNum = displayValue;
+                result = operate(operator, firstNum, secondNum);
+                display.textContent = result;
+                firstNum = result;
+                secondNum = 0;
+                operator = button.id;
+            } else {
+                // If we don't have a first number yet, store the current value as the first number
+                firstNum = displayValue;
+                operator = button.id;
+                hasFirstNum = true;
+            }
             operatorStatus = true;
-            console.log(operator);
-            console.log(firstNum);
         });
     });
 }
 
+function clickEquals() {
+    let result = 0;
+
+    equalsButton.addEventListener("click", () => {
+        result = operate(operator, firstNum, secondNum);
+        display.textContent = result;
+        firstNum = result;
+    })
+  
+}
+
 displayNum()
 clickOperator()
+clickEquals()
