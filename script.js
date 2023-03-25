@@ -8,7 +8,7 @@ const opButtons = document.querySelectorAll(".operator")
 const equalsButton = document.querySelector(".equals")
 let operatorStatus = false;
 let hasFirstNum = false;
-let result = 0;
+let noNum = false;
 
 // Takes two numbers and returns their sum.
 function add(a, b) {
@@ -69,7 +69,7 @@ function displayNum() {
                 displayValue = display.textContent;
                 hasFirstNum = true;
             }
-            
+
         });
     });
 }
@@ -79,8 +79,9 @@ function clickOperator() {
         button.addEventListener("click", () => {
             if (hasFirstNum) {
                 // If we already have a first number, calculate with the second number
-                secondNum = displayValue;
+                secondNum = display.textContent;
                 result = operate(operator, firstNum, secondNum);
+                console.log(`${firstNum} ${operator} ${secondNum}`)
                 display.textContent = result;
                 firstNum = result;
                 secondNum = 0;
@@ -97,15 +98,20 @@ function clickOperator() {
 }
 
 function clickEquals() {
-    let result = 0;
-
     equalsButton.addEventListener("click", () => {
+      if (hasFirstNum) {
+        // If we have a first number, calculate with the second number
+        secondNum = displayValue;
         result = operate(operator, firstNum, secondNum);
         display.textContent = result;
         firstNum = result;
-    })
-  
-}
+        secondNum = 0;
+        operator = "";
+        hasFirstNum = false;
+        operatorStatus = true;
+      }
+    });
+  }
 
 displayNum()
 clickOperator()
