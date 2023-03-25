@@ -1,9 +1,11 @@
-const firstNum = 0;
-const secondNum = 0;
-const operator = "";
+let firstNum = 0;
+let secondNum = 0;
+let operator = "";
 const display = document.querySelector(".display")
 let displayValue = 0;
 const numButtons = document.querySelectorAll(".num-button");
+const opButtons = document.querySelectorAll(".operator") 
+let operatorStatus = false;
 
 // Takes two numbers and returns their sum.
 function add(a, b) {
@@ -54,8 +56,35 @@ function displayNum() {
         button.addEventListener("click", () => {
             display.textContent += button.textContent;
             displayValue = display.textContent;
+
+            if (operatorStatus) {
+                operatorStatus = false;
+                display.textContent = "";
+                display.textContent += button.textContent;
+                displayValue = display.textContent;
+            }
+
+            /*if (first calculation) {
+                
+            } else if (after first calculation) {
+
+            }
+            */
+        });
+    });
+}
+
+function clickOperator() {
+    opButtons.forEach(button => {
+        button.addEventListener("click", () => {
+            firstNum = displayValue;
+            operator = button.id
+            operatorStatus = true;
+            console.log(operator);
+            console.log(firstNum);
         });
     });
 }
 
 displayNum()
+clickOperator()
